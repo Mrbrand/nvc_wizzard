@@ -145,10 +145,17 @@ $(".more-button").click(function() {
 $(document).on('click', ".subitem-right", function() {
 	id = $(this).parent().find(".item_id").text();
 	item = itemList.get_item(id);
-	view_new( {title:"", type:"6", parent_id: item.id,  icon:"", prio:"1", category: item.category, postpone: ""});
+	view_new( {title:"", type:"2", parent_id: item.id,  icon:"", prio:"1", category: item.category});
 });
 
 
+$(document).on('click', "#task_list .new-item-button", function() {
+	view_new( {title:"", type:"1",  icon:"", prio:"1"});
+});
+
+$(document).on('click', "#single_issue .new-item-button", function() {
+	view_new( {title:"", type:"2",  icon:"", prio:"1"});
+});
 
 $(".pref-button").click(function() { 
 	open_page("#menu");

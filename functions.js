@@ -1,5 +1,5 @@
 /* INIT *******************************************************************/
-var itemList = new Carbon("bunny2_1_items");
+var itemList = new Carbon("nvc_wizzard_items");
 
 var current_page = "#task_list";
 var previous_page = "";
@@ -79,14 +79,14 @@ function view_task_list(){
 
 	var query = $("#search").val().toLowerCase();
    var icon = $('input[name="icon"]:checked').val();
-	var type = $("#task_list .type_filter").val();
+	//var type = $("#task_list .type_filter").val();
 	var status = $("#status_filter").val();
 
    var items=itemList.get_all();
 	var items_with_meta = [];
 	
 	
-	if(type!="*") items=items.query("type", "==", type); 	// filtrera på type om type är vald	
+	items=items.query("type", "==", "1"); 	
 	if(icon) items=items.query("icon", "==", icon); 	// filtrera på ikon om ikon är vald	
 		
 	debug.comment("Före metadata");
@@ -101,9 +101,10 @@ function view_task_list(){
 		});
 		items = items_with_meta;
 		debug.comment("Efter metadata");
-		//if (query=="" & type=="*") 	items = items.query("open_task_count", "==", 0);		// filtrera bort projekt som redan har subtask
+		//if (query=="") 	items = items.query("has_parents", "==", false);		// filtrera bort projekt som redan har subtask
 		
-		//console.log(items);
+
+//console.log(items);
 		//filtrera allmänt
 		items =items
       .query("has_parent", "==", false) 	// filtrera på type om type är vald	
@@ -113,7 +114,7 @@ function view_task_list(){
 			.query("title, notes, parent_tree", "contains", query);
 
 		//sortera items
-		items.sort(firstBy("finish_date","-1").thenBy("prio").thenBy("postpone") .thenBy("order_main"));
+		items.sort(firstBy("start_date", -1).thenBy("prio").thenBy("postpone") .thenBy("order_main"));
 		
 		mustache_output("#tasks", items, "#filtered_task_template");
 	}
@@ -144,7 +145,7 @@ function view_task_list(){
 
 function view_single_issue (id) {
 	$('.new-item-div').hide();   
-	$("#single_issue .type-icon").html("<img src='img/type"+current_item.type+".png'>");    	
+	$("#single_issue .type-icon").html("<img style='height:32px;' src='img/type"+current_item.type+".png'>");    	
 	$("#single_issue .menu-title").text(current_item.title);    
 
 	var type = $("#single_issue .type_filter").val();

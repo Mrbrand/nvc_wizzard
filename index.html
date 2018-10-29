@@ -10,7 +10,7 @@
 		<meta content="yes" name="apple-mobile-web-app-capable" />
 		<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
 		<link rel="apple-touch-icon" href="img/icon.png"/>
-        <link rel="icon" type="image/png" href="http://betarabbit.com/wiseguy/img/target.png">
+        <link rel="icon" type="image/png" href="http://betarabbit.com/wiseguy/img/heart.png">
 		
 		<link rel="stylesheet" type="text/css" href="style.css"/>
 		<!link rel="stylesheet" type="text/css" href="carbon.css"/>
@@ -39,14 +39,14 @@
 	<body>
 		
 		
-<!--TASK LIST -------------->
+<!--SITUATIONS  LIST -------------->
 	<div id="task_list" class="page" style="display:none;">
 			  
 			<div class="header">
 				<div style="float:left;">
 				 
 				
-				<select class="type_filter" style="background-color: rgba(255,255,255,.1); font-size:16pt; width:120px; float:left; margin-right:10px;">
+				<!--select class="type_filter" style="background-color: rgba(255,255,255,.1); font-size:16pt; width:120px; float:left; margin-right:10px;">
 					<option value="*">-All types-</option>				
 					<option value="1" selected>Page</option>
 					<option value="2">Project</option>
@@ -54,7 +54,7 @@
 					<option value="4">Milestone</option>
 					<option value="5">Task</option>
 					<option value="6">Idea</option>
-				</select>
+				</select-->
 
 				</div>
 				
@@ -70,19 +70,11 @@
 					<option value="finished">finished</option>
 				</select>
 
-        <button class="new-item-button" style="float:right;" onclick="$('.new-item-div').toggle();">New</button>
-				<div class="new-item-div" style="position: absolute; width: 130px; height:300px; right:0; top: 40px; padding:10px; display:none; text-align: right;">
-					<!--button style="margin-bottom: 10px;">Idea</button><br-->
-					<button style="margin-bottom: 10px;" onclick='view_new({title:title, type:"1", icon:"", prio:"1", postpone:""});'>Page</button><br>
-					<button style="margin-bottom: 10px;" onclick='view_new({title:title, type:"2", icon:"", prio:"1", postpone:""});'>Project</button><br>
-					<button style="margin-bottom: 10px;" onclick='view_new({title:title, type:"3", icon:"", prio:"1", postpone:""});'>Area</button><br>
-					<button style="margin-bottom: 10px;" onclick='view_new({title:title, type:"6", icon:"", prio:"1", postpone:""});'>Idea</button><br>
-					<!--button style="margin-bottom: 10px;">Project Group</button><br>
-					<button style="margin-bottom: 10px;">Document</button-->				
-				</div>
+        <button class="new-item-button" style="float:right;">New</button>
+			
           </div><!-- end controls-->
 
-		<! New types>
+		<!--New types>
 			<div id="new-controls" class="controls" style="height:40px; padding: 5px; display:none;">
         <button style="float:right; margin-right:5px; ">Idea</button>
 				<button style="float:right; margin-right:5px; ">Task</button>
@@ -90,7 +82,7 @@
 				<button style="float:right; margin-right:5px; ">Milestone</button>
 				<button style="float:right; margin-right:5px; ">Folder</button>
 				<button style="float:right; margin-right:5px; ">Doc</button>
-        	</div><!-- end controls-->
+        	</div--><!-- end controls-->
 
 		<! Extra Controls>
 			<div id="extra-controls" class="controls" style="height:40px; padding: 5px; display:none;">
@@ -149,12 +141,9 @@
 		<div style="float:left;margin-left:5px;">
 				<select class="type_filter" style="background-color: rgba(255,255,255,.1); font-size:16pt; width:120px; float:left; margin-right:10px;">
 						<option value="*">-All types-</option>				
-						<option value="1">Page</option>
-						<option value="2">Project</option>
-						<option value="3">Area</option>
-						<option value="4">Milestone</option>
-						<option value="5">Task</option>
-						<option value="6">Idea</option>
+						<option value="1">Situation</option>
+						<option value="2">Comment</option>
+
 				</select>
 		</div><!end filter div>
 		<button class="new-item-button" style="float:right;" onclick="$('.new-item-div').toggle();">New</button>
@@ -206,13 +195,9 @@
 					<! TYPE>     		
 				<select name="type" class="type_select autovalue">
 					<option value="">- Select type -</option>					
-					<option value="1">Page</option>
-					<option value="2">Project</option>
-					<option value="3">Area</option>
-					<option value="4">Milestone</option>
-					<option value="5">Task</option>
-					<option value="6">Idea</option>
-				</select> 
+					<option value="1">Situation</option>
+					<option value="2">Comment</option>
+			 </select> 
 		
  			 <! PARENT >
                     <!--span class="field-description">Parent item in tree</span>
@@ -290,18 +275,17 @@
         	<span class="field-description">Context</span>  
   
   				<div class="task-icons icons" style="margin: 10px 0;">
-		          <label><input type="radio" name="icon" value="🛑" /><span>🛑</span></label>
-							<label><input type="radio" name="icon" value="💻" /><span>💻</span></label>
-							<label><input type="radio" name="icon" value="➡️" /><span>➡️</span></label>
-							<label><input type="radio" name="icon" value="⚡" /><span>⚡</span></label>
-							<label><input type="radio" name="icon" value="🛎️" /><span>🛎️</span></label>
-							<label><input type="radio" name="icon" value="✅" /><span>✅</span></label>
-							<label><input type="radio" name="icon" value="💎" /><span>💎</span></label>
-							<label><input type="radio" name="icon" value="💜" /><span>💜</span></label>
+		          <label><input type="radio" name="icon" value="🚩 " /><span>🚩 </span></label>
+							<label><input type="radio" name="icon" value="❤️" /><span>❤️</span></label>
+							<label><input type="radio" name="icon" value="🌿" /><span>🌿</span></label>
+							<label><input type="radio" name="icon" value="🐺" /><span>🐺</span></label>
+							<label><input type="radio" name="icon" value="🙏 " /><span>🙏 </span></label>
+							<label><input type="radio" name="icon" value="💡" /><span>💡</span></label>
+							<label><input type="radio" name="icon" value="🔭" /><span>🔭</span></label>
+							<label><input type="radio" name="icon" value="👎" /><span>👎</span></label>
 							<label><input type="radio" name="icon" value="" /><span>none</span></label>
         	</div>
 
-		
         		
         		<div class="context" style="margin: 10px 0; display:inline;">
 		            <!...>
@@ -341,12 +325,9 @@
 						<! TYPE>     		
 				<select name="type" class="type_select autovalue">
 					<option value="">- Select type -</option>					
-					<option value="1">Page</option>
-					<option value="2">Project</option>
-					<option value="3">Area</option>
-					<option value="4">Milestone</option>
-					<option value="5">Task</option>
-					<option value="6">Idea</option>
+					<option value="1">Situation</option>
+					<option value="2">Comment</option>
+
 				</select>    	
 	  			
 						<! CREATED >                                                   
