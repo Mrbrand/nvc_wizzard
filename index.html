@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>NVC Wizzard</title> 
+    	
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />
+<meta name="format-detection" content="telephone=yes" />
+        <!meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
+		<link rel="apple-touch-icon" href="img/icon.png"/>
+        <link rel="icon" type="image/png" href="http://betarabbit.com/wiseguy/img/target.png">
+		
+		<link rel="stylesheet" type="text/css" href="style.css"/>
+		<!link rel="stylesheet" type="text/css" href="carbon.css"/>
+		<!link rel="stylesheet" type="text/css" href="light.css"/>
+    	
+	
+        
+        <script language="JavaScript" type="text/javascript" src="javascript/moment.min.js"></script>
+		<script language="JavaScript" type="text/javascript" src="javascript/mustache.js"></script>	
+		<script language="JavaScript" type="text/javascript" src="javascript/jquery-2.1.3.min.js"></script> 
+		<script language="JavaScript" type="text/javascript" src="javascript/thenby.js"></script>
+        <!--script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script-->
+		<script language="JavaScript" type="text/javascript" src="javascript/jquery.detect_swipe.js"></script> 
+		<!--script language="JavaScript" type="text/javascript" src="javascript/tinysort.js"></script-->
+         <!--dropdown select inputs-->
+        <!--script src="javascript/jquery.dd.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="css/msdropdown/dd.css" /-->
+
+			<link rel="stylesheet" href="awesomplete/awesomplete.css" />
+        <script src="awesomplete/awesomplete.js"></script>
+        
+        <script src="javascript/sortable.js"></script>
+		
+	</head>
+
+	<body>
+		
+		
+<!--TASK LIST -------------->
+	<div id="task_list" class="page" style="display:none;">
+			  
+			<div class="header">
+				<div style="float:left;">
+				 
+				
+				<select class="type_filter" style="background-color: rgba(255,255,255,.1); font-size:16pt; width:120px; float:left; margin-right:10px;">
+					<option value="*">-All types-</option>				
+					<option value="1" selected>Page</option>
+					<option value="2">Project</option>
+					<option value="3">Area</option>
+					<option value="4">Milestone</option>
+					<option value="5">Task</option>
+					<option value="6">Idea</option>
+				</select>
+
+				</div>
+				
+         <img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
+			</div> <!--end header-->
+			
+		<! Controls>
+			<div class="controls" style="height:40px; padding: 5px; position: relative;">
+           <input id="search" type="search" placeholder="Search..." value="" style="width:70px; float:left; margin-left:5px;"/>
+				
+			<select id="status_filter" style="background-color: rgba(255,255,255,.1); font-size:12pt; width:110px; float:left; margin-left:10px;">
+					<option value="unfinished" selected="selected">unfinished</option>
+					<option value="finished">finished</option>
+				</select>
+
+        <button class="new-item-button" style="float:right;" onclick="$('.new-item-div').toggle();">New</button>
+				<div class="new-item-div" style="position: absolute; width: 130px; height:300px; right:0; top: 40px; padding:10px; display:none; text-align: right;">
+					<!--button style="margin-bottom: 10px;">Idea</button><br-->
+					<button style="margin-bottom: 10px;" onclick='view_new({title:title, type:"1", icon:"", prio:"1", postpone:""});'>Page</button><br>
+					<button style="margin-bottom: 10px;" onclick='view_new({title:title, type:"2", icon:"", prio:"1", postpone:""});'>Project</button><br>
+					<button style="margin-bottom: 10px;" onclick='view_new({title:title, type:"3", icon:"", prio:"1", postpone:""});'>Area</button><br>
+					<button style="margin-bottom: 10px;" onclick='view_new({title:title, type:"6", icon:"", prio:"1", postpone:""});'>Idea</button><br>
+					<!--button style="margin-bottom: 10px;">Project Group</button><br>
+					<button style="margin-bottom: 10px;">Document</button-->				
+				</div>
+          </div><!-- end controls-->
+
+		<! New types>
+			<div id="new-controls" class="controls" style="height:40px; padding: 5px; display:none;">
+        <button style="float:right; margin-right:5px; ">Idea</button>
+				<button style="float:right; margin-right:5px; ">Task</button>
+				<button style="float:right; margin-right:5px; ">Project</button>
+				<button style="float:right; margin-right:5px; ">Milestone</button>
+				<button style="float:right; margin-right:5px; ">Folder</button>
+				<button style="float:right; margin-right:5px; ">Doc</button>
+        	</div><!-- end controls-->
+
+		<! Extra Controls>
+			<div id="extra-controls" class="controls" style="height:40px; padding: 5px; display:none;">
+  
+				<div style="margin: 10px 10px; float:left;">
+		      <label><input type="radio" name="icon" value="📞" /><span>📞</span></label>
+					<label><input type="radio" name="icon" value="💻" /><span>💻</span></label>
+					<label><input type="radio" name="icon" value="📱" /><span>📱</span></label>
+					<label><input type="radio" name="icon" value="🏠" /><span>🏠</span></label>
+					<label><input type="radio" name="icon" value="🚶" /><span>🚶</span></label>
+					<label><input type="radio" name="icon" value="📝" /><span>📝</span></label>
+					<label><input type="radio" name="icon" value="🚘" /><span>🚘</span></label>
+					<label><input type="radio" name="icon" value="🎓" /><span>🎓</span></label>
+
+					<label><input type="radio" name="icon" value="" checked="checked" /><span>All</span></label>
+        		</div>
+
+			
+					
+			<button onclick="$('#extra-controls').hide();" style="float:right;">X</button>
+			
+          </div><!-- end controls-->
+
+
+            
+			<!-- ItemLista -->
+			<div id="items">
+				<div id="tasks"></div>
+			</div><!-- end items--> 
+			
+</div><!-- end page-->
+
+
+
+
+
+			
+<!--SINGLE ITEM PAGE -------------->
+	<div id="single_issue" class="page" style="display:none; min-height:450px;">
+	  
+	<div class="header">
+		<div class="type-icon" style="float:left;">...</div>		
+		<div class="menu-title" style="float:left;">...</div>
+		
+
+		<!img class="search-button" src="img/star.png"  style="float:right; margin:5px; cursor:pointer;"/>
+        <!img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
+ 		<img id="edit-button" src="img/edit.png"  style="float:right; margin:5px; cursor:pointer; height: 24px;"/>
+	</div> <!--end header-->
+	
+	<!--Sub-meny-->
+	<div class="controls">
+		<!--button class="home-button"><img src="img/home16.png"</button-->
+		<button onclick="open_page('#task_list');" style="float:left;">Back</button>
+		<button class="up-button" style="float:left; margin-left:5px;">Up</button>
+		<div style="float:left;margin-left:5px;">
+				<select class="type_filter" style="background-color: rgba(255,255,255,.1); font-size:16pt; width:120px; float:left; margin-right:10px;">
+						<option value="*">-All types-</option>				
+						<option value="1">Page</option>
+						<option value="2">Project</option>
+						<option value="3">Area</option>
+						<option value="4">Milestone</option>
+						<option value="5">Task</option>
+						<option value="6">Idea</option>
+				</select>
+		</div><!end filter div>
+		<button class="new-item-button" style="float:right;" onclick="$('.new-item-div').toggle();">New</button>
+				<div class="new-item-div" style="position: absolute; width: 130px; height:300px; right:0; top: 100px; padding:10px; display:none; text-align: right;">
+					<!--button style="margin-bottom: 10px;">Idea</button><br-->
+					<button style="margin-bottom: 10px;" onclick='view_new({title:title, type:"2", icon:"", prio:"1", postpone:""});'>Project</button><br>
+					<button style="margin-bottom: 10px;" onclick='view_new({title:title, type:"3", icon:"", prio:"1", postpone:""});'>Area</button><br>
+					<button style="margin-bottom: 10px;" onclick='view_new({title:title, type:"4", icon:"", prio:"1", postpone:""});'>Milestone</button><br>
+					<button style="margin-bottom: 10px;" onclick='view_new({title:title, type:"5", icon:"", prio:"1", postpone:""});'>Task</button><br>
+					<button style="margin-bottom: 10px;" onclick='view_new({title:title, type:"6", icon:"", prio:"1", postpone:""});'>Idea</button><br>
+					<!--button style="margin-bottom: 10px;">Project Group</button><br>
+					<button style="margin-bottom: 10px;">Document</button-->				
+				</div>    
+
+	</div><!-- end controls-->
+	
+	<!-- Projektlista -->
+	<div id="items">
+		<div id="open" class="list-group"></div>
+		<div id="finished"></div>
+	</div><!-- end items--> 
+	
+</div><!-- end page-->
+
+
+		
+		
+		
+		
+		
+<!-- NEW item--------------------------------------------------------------------------->
+		<div id="new" class="page" style="display:none;">
+			
+			<div class="header">
+				<div class="menu-title">-new item-</div>
+			</div> <!--end header-->
+			
+			<!--Sub-meny-->
+			<div class="controls">
+				<button class="cancel-button">Cancel</button>
+				<button class="add-button">Add</button>
+			</div><!-- end controls--> 
+		
+			<form id="new-item-form">
+			  
+			  <! TITLE>
+				<textarea id="new-item-title" name="title" class="autovalue" placeholder="Title" rows="1" autofocus style="margin-bottom:5px;height:50px; font-size:1.3em; padding-top: 11px;"></textarea><br/>
+     	
+					<! TYPE>     		
+				<select name="type" class="type_select autovalue">
+					<option value="">- Select type -</option>					
+					<option value="1">Page</option>
+					<option value="2">Project</option>
+					<option value="3">Area</option>
+					<option value="4">Milestone</option>
+					<option value="5">Task</option>
+					<option value="6">Idea</option>
+				</select> 
+		
+ 			 <! PARENT >
+                    <!--span class="field-description">Parent item in tree</span>
+        					<!input class="autovalue" type="text" placeholder="Type item name or id" style="margin-bottom:5px;height:40px; font-size:1.1em; width: 100%;"/>	
+                    <input id="parent2" class="autovalue"  type="text" placeholder="Type item name or id" style="margin-bottom:5px;height:40px; font-size:1.1em; width: 100%;"/-->	
+   		 
+			<! CONTEXT>
+        		<span class="field-description context">Context</span>  
+     		
+           	<div class="context" style="margin: 10px 0;">
+		          <label><input type="radio" name="icon" value="📞" /><span>📞</span></label>
+							<label><input type="radio" name="icon" value="💻" /><span>💻</span></label>
+							<label><input type="radio" name="icon" value="📱" /><span>📱</span></label>
+							<label><input type="radio" name="icon" value="🏠" /><span>🏠</span></label>
+							<label><input type="radio" name="icon" value="🚶" /><span>🚶</span></label>
+							<label><input type="radio" name="icon" value="📝" /><span>📝</span></label>
+							<label><input type="radio" name="icon" value="🚘" /><span>🚘</span></label>
+							<label><input type="radio" name="icon" value="🎓" /><span>🎓</span></label>
+        		</div>
+        		
+        		<div class="context" style="margin: 10px 0; display:inline;">
+		            <!...>
+        		</div>
+			
+ 		 <! NOTES>       
+				<textarea name="notes" class="autovalue" placeholder="Notes" rows="5"></textarea>
+				
+			 <! hidden >
+        <input name="category" class="category_select autovalue" type="hidden" />
+        <input name="order" value="0"  type="hidden" />
+				<!input name="parent_id" class="autovalue" type="hidden" />
+				<input name="finish_date"  value="" type="hidden" />
+				<input name="prio"  value="1" type="hidden" />
+				
+			</form>
+			<br/><br/><br/><br/><br/><br/><br/>
+		</div><!-- end new-item--> 
+				
+
+
+
+
+
+
+		
+<!-- EDIT item ---------------------------------------------------------------------->
+		<div id="edit" class="page" style="display:none;">
+			
+			<div class="header">
+				<div class="menu-title">-item-title-</div>
+			</div> <!--end header-->
+			
+			<!--Sub-meny-->
+			<div class="controls">
+				<button class="cancel-button">Cancel</button>
+				<button class="save-button" style="width:70px; float:right;margin-left:5px;"><img src="img/save.png" /></button>
+				<button class="delete-button" style="width:70px; float:right;margin-left:5px;"><img src="img/delete2.png" /></button>
+				<button class="finish-button" style="width:70px; float:right;margin-left:5px;"><img src="img/finish.gif" /></button>
+				<br/><br/>
+			</div><!-- end controls--> 
+			
+			
+			<form id="edit-item-form">
+				
+			<! TITLE >
+				<input class="autovalue" name="title" type="text" style="margin-bottom:5px; height:50px; font-size:1.3em"/><br/>
+				
+			<! PARENT >
+		        <span class="field-description">Parent item in tree</span>
+		        <input id="parent" class="autovalue"  type="text" placeholder="Type item name or id" style="margin-bottom:5px;height:40px; font-size:1.1em; width: 100%;"/>	
+		         	<div class="parents"></div>
+   			
+
+			<! CONTEXT>
+        	<span class="field-description">Context</span>  
+  
+  				<div class="task-icons icons" style="margin: 10px 0;">
+		          <label><input type="radio" name="icon" value="🛑" /><span>🛑</span></label>
+							<label><input type="radio" name="icon" value="💻" /><span>💻</span></label>
+							<label><input type="radio" name="icon" value="➡️" /><span>➡️</span></label>
+							<label><input type="radio" name="icon" value="⚡" /><span>⚡</span></label>
+							<label><input type="radio" name="icon" value="🛎️" /><span>🛎️</span></label>
+							<label><input type="radio" name="icon" value="✅" /><span>✅</span></label>
+							<label><input type="radio" name="icon" value="💎" /><span>💎</span></label>
+							<label><input type="radio" name="icon" value="💜" /><span>💜</span></label>
+							<label><input type="radio" name="icon" value="" /><span>none</span></label>
+        	</div>
+
+		
+        		
+        		<div class="context" style="margin: 10px 0; display:inline;">
+		            <!...>
+        		</div>                
+               
+       	 <! PRIO>
+         		<span class="field-description"  >Prio</span>  
+         		<div name="prio" class="autovalue" style="margin: 10px 0;">
+		           <label><input type="radio" name="prio" value="1" /><img src="img/prio1.png"></label>
+  						<label><input type="radio" name="prio" value="2" /><img src="img/prio2.png"></label>
+  						<label><input type="radio" name="prio" value="3" /><img src="img/prio3.png"></label>
+  						<label><input type="radio" name="prio" value="4" /><img src="img/prio4.png"></label>
+  						<label><input type="radio" name="prio" value="5" /><img src="img/prio5.png"></label>
+  						<label><input type="radio" name="prio" value="6" /><img src="img/none.png"></label>
+        		</div>
+				
+		
+			<! NOTES >
+				<textarea class="autovalue" name="notes" rows="8" placeholder="Notes"></textarea>
+
+			<! MORE BUTTON >
+				<center>
+					<button class="more-button" type='button'>More options</button>
+				</center>
+				
+				<div class="more" style="display:none;">
+                    
+       <!HIDDEN>
+          <div style="display:none;" >
+							<input class="item-id autovalue" name="id" type="text" /> <br/>
+							<!input class="autovalue" name="parent_id" type="text"/><!br/>	
+							<!input class="autovalue" name="type" type="text" /> <!br/>
+							<input class="autovalue" type="text" name="order" />
+          </div>	
+                   
+          	
+						<! TYPE>     		
+				<select name="type" class="type_select autovalue">
+					<option value="">- Select type -</option>					
+					<option value="1">Page</option>
+					<option value="2">Project</option>
+					<option value="3">Area</option>
+					<option value="4">Milestone</option>
+					<option value="5">Task</option>
+					<option value="6">Idea</option>
+				</select>    	
+	  			
+						<! CREATED >                                                   
+			            <span class="field-description">Item created</span>
+									<input class="autovalue" name="start_date" type="text" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>	
+			              
+		       <! UPDATED >
+		          <span class="field-description">Last updated</span>
+			 				<input class="autovalue" name="update_date" type="text" placeholder="Not set" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>
+				
+						<! FINISHED >
+			         <span class="field-description">Finish date</span>
+								<input class="autovalue" name="finish_date" type="text" placeholder="Not set" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>
+					
+				</div>
+				
+			</form>
+		</div><!--edit-item--> 
+
+
+	
+
+<! SETTINGS PAGE >
+		<div id="menu" class="page" style="display:none;">
+			
+            <div class="header">
+    			<div style="float:left;">Preferences</div>
+			</div> <!--end header-->
+			
+			<!--Sub-meny-->
+			<div class="controls">
+				<button onclick="open_page('#task_list');">Back</button>
+			</div><!-- end controls-->
+            
+            <input id="debug" type="checkbox" style="width:25px; float:left; margin-left:5px;">
+					<span style="color:gray; margin-left:3px; font-size:9pt;">activate debug timer</span>
+					<br/><br/>
+           	
+           	<input id="show_postponed" type="checkbox" checked="checked" style="width:25px; float:left; margin-left:5px;">
+					<span style="color:gray; margin-left:3px; font-size:9pt;">show postponed</span>
+           			<br/><br/>
+            	
+            Export filter <br/>
+            <input id="field1" style="width:100px">
+            <select id="op1" style="width:50px;">
+					<option value="==">==</option>
+					<option value="!=">!=</option>
+					<option value="contains">contains</option>
+					<option value="<"><</option>
+					<option value=">">></option>
+				</select>
+			<input id="value1" style="width:100px"><br/>
+			<input id="field2" style="width:100px">
+            <select id="op2" style="width:50px;">
+					<option value="==">==</option>
+					<option value="!=">!=</option>
+					<option value="contains">contains</option>
+					<option value="<"><</option>
+					<option value=">">></option>
+				</select>
+			<input id="value2" style="width:100px"><br/>
+			
+           	<button onclick="view_settings();">Refresh</button><br/><br/>
+           	<div id="export_count"></div>
+           	<button id="export-button">Export</button><br/><br/>
+           	
+           	
+           	
+           	<textarea id="import" style="width:70px;" /></textarea>
+           	<br/><button id="import-button">Import</button>
+           	
+			
+		</div><!-- end menu--> 
+		
+		<!EXPORT>
+    	<div id="export" class="page">
+			
+		</div><!-- end EXPORt--> 
+		
+		
+	</body>
+</html>
+
+
+
+<!-- Mustache template öppna tasks-->
+<script id="open_task_template" type="text/template">
+	<div class="item task {{#postpone}} postponed{{/postpone}}">
+						
+		<div class="subitem-left quick_edit_item">
+			
+    		{{#icon}}<div style="font-size: 22px; margin:10px 7px 0 7px; ">{{icon}}</div>{{/icon}}
+			{{^icon}}<img class="type-icon" style="margin:10px 7px 0 7px; height:32px;" src="img/type{{type}}.png"/>{{/icon}}
+            <img class="prio-icon" src="img/prio{{prio}}.png"/>
+            {{#scope}}<span style="padding:1px 2px ; border-radius:3px; font-size:10px;background: #ABC; color:#456; margin-left:5px;">{{scope}} min</span>{{/scope}}
+            <!--span style="color:#888;">{{order}}</span-->
+		</div>
+		
+        
+        <div class="subitem-right" style="width:30px; float: right;  height:40px; padding:15px 20px 10px 20px;;">
+    		<img src="img/handle3.png"/>
+		</div>
+        
+		<div class="subitem-center">
+			<div class="title" style="">{{title}}</div>
+			<div class="next_action_div" style="float:left;">				
+				{{#subitems}}
+					{{#icon}}<span style="font-size: 13px;">{{icon}}</span>{{/icon}}
+					{{^icon}}<img style="margin:4px 0px 4px 5px;height:13px;vertical-align: text-top;" src="img/type{{type}}.png"/>{{/icon}}
+					<span class="next_action">{{title}}</span>
+					<img style="margin:4px 0px 4px 0;height:10px;vertical-align: text-top;" src="img/prio{{prio}}.png"/>
+                    {{#postpone}}<span class="postpone" style="background:#567;">{{postpone}}</span>{{/postpone}}
+				{{/subitems}} {{#open_task_count}}<span style="padding:1px 2px ; border-radius:3px; font-size:10px;background: rgba(150,150,100,0.2); color:#A96;">{{open_task_count}} items</span>{{/open_task_count}}
+				{{#postpone}}<span class="postpone">{{postpone}}</span>{{/postpone}}
+				{{#notes}}<div class="notes">{{notes}}</div>{{/notes}}
+			</div>
+		</div><!-- end subitem-center -->
+		 
+		<div style="clear:both;"></div>
+		
+		<span class="item_id" style="display:none;">{{id}}</span>
+		<span class="prio" style="display:none;">{{prio}}</span>
+		<span class="type" style="display:none;">{{type}}</span>
+		<span class="size" style="display:none;">{{size}}</span>
+	
+	</div><!-- end subitem  -->
+</script>	
+	
+	
+<!-- Mustache template avslutade -->
+<script id="finished_task_template" type="text/template">
+	<div class="item task finished">
+						
+		<div class="subitem-left quick_edit_item">
+			<img class="prio-icon" src="img/prio{{prio}}.png"/>
+			<img class="type-icon" style="margin:4px 7px;" src="img/type{{type}}.png"/>
+ 			{{#scope}}<span style="padding:1px 2px ; border-radius:3px; font-size:10px;background: #ABC; color:#456; margin-left:5px;">{{scope}} min</span>{{/scope}}
+		</div>
+		
+		<div class="subitem-center">
+			<div class="title" style="">{{title}}</div>
+			<div class="next_action_div" style="float:left;">
+				<span class="finish_date">{{finish_date}}</span>
+				{{#notes}}<span class="notes">{{notes}}</span>{{/notes}}
+			</div>
+		</div><!-- end subitem-center -->
+		 
+		<div style="clear:both;"></div>
+		
+		<span class="item_id" style="display:none;">{{id}}</span>
+		<span class="prio" style="display:none;">{{prio}}</span>
+		<span class="type" style="display:none;">{{type}}</span>
+	
+	</div><!-- end subitem  -->
+</script>	
+	
+	
+<!-- Mustache template filtered task-->
+<script id="filtered_task_template" type="text/template">
+	<div class="item task {{#postpone}} postponed{{/postpone}}">
+						
+		<div class="subitem-left quick_edit_item">
+			
+    		{{#icon}}<div style="font-size: 22px; margin:10px 7px 0 7px; ">{{icon}}</div>{{/icon}}
+			{{^icon}}<img class="type-icon" style="margin:10px 7px 0 7px; height:32px;" src="img/type{{type}}.png"/>{{/icon}}
+            <img class="prio-icon" src="img/prio{{prio}}.png"/>
+            {{#scope}}<span style="padding:1px 2px ; border-radius:3px; font-size:10px;background: #ABC; color:#456; margin-left:5px;">{{scope}} min</span>{{/scope}}
+		</div>
+		
+		 <div class="subitem-right" style="width:30px; float: right;  height:40px; padding:15px 20px 10px 20px;;">
+    		<img src="img/handle3.png"/>
+		</div>
+		<!--div class="subitem-right" style="width:30px; float: right;  height:40px; padding:15px 10px 10px 20px;;">
+    		<button style="float: right; margin-right: 5px; height:30px; width: 30px;">+</button>
+		</div-->
+
+		<div class="subitem-center">
+			<div class="title" style="">{{title}}</div>
+			<div class="parent" style="">{{category_icon}}{{parent_tree}}</div>
+			<div class="next_action_div" style="float:left;">
+				{{#postpone}}<span class="postpone">{{postpone}}</span>{{/postpone}}
+				{{#notes}}<div class="notes">{{notes}}</div>{{/notes}}
+				{{#subitems}}
+					{{#icon}}<span style="font-size: 13px;">{{icon}}</span>{{/icon}}
+					{{^icon}}<img style="margin:4px 0px 4px 5px;height:13px;vertical-align: text-top;" src="img/type{{type}}.png"/>{{/icon}}
+					<span class="next_action">{{title}}</span>
+					<img style="margin:4px 0px 4px 0;height:10px;vertical-align: text-top;" src="img/prio{{prio}}.png"/>
+                    {{#postpone}}<span class="postpone" style="background:#567;">{{postpone}}</span>{{/postpone}}
+				{{/subitems}} {{#open_task_count}}<span style="padding:1px 2px ; border-radius:3px; font-size:10px;background: rgba(150,150,100,0.2); color:#A96;">{{open_task_count}} items</span>{{/open_task_count}}
+			</div>
+		</div><!-- end subitem-center -->
+		 
+		<div style="clear:both;"></div>
+		
+		<span class="item_id" style="display:none;">{{id}}</span>
+		<span class="prio" style="display:none;">{{prio}}</span>
+		<span class="type" style="display:none;">{{type}}</span>
+		<span class="size" style="display:none;">{{size}}</span>
+	
+	</div><!-- end subitem  -->
+</script>	
+
+
+<!-- Mustache template category <-->
+<script id="category_template" type="text/template">
+	<div class="item category {{#postpone}} postponed{{/postpone}}">
+						
+		<div class="subitem-left quick_edit_item">
+			
+    		{{#icon}}<div style="font-size: 22px; margin:10px 7px 0 7px; ">{{icon}}</div>{{/icon}}
+			{{^icon}}<img class="type-icon" style="margin:10px 7px 0 7px; height:32px;" src="img/type{{type}}.png"/>{{/icon}}
+            <!--span style="color:#888;">{{order}}</span-->
+		</div>
+		
+        
+        <div class="subitem-right" style="width:30px; float: right;  height:40px; padding:15px 20px 10px 20px;;">
+    		<img src="img/handle3.png"/>
+		</div>
+        
+		<div class="subitem-center">
+			<div class="title" style="">{{title}}</div>
+		</div><!-- end subitem-center -->
+		 
+		<div style="clear:both;"></div>
+		
+		<span class="item_id" style="display:none;">{{id}}</span>
+		<span class="type" style="display:none;">{{type}}</span>
+	
+	</div><!-- end subitem  -->
+</script>	
+
+<script id="tags_template" type="text/template">
+	<button class="tag-button">{{tag}} ({{count}})</button>
+</script>	
+
+<script id="category_input_template" type="text/template">
+	 <span style="width:50px;"/>{{icon}}</span>
+	 <span style="width:150px;"/>{{title}}</span><br>
+</script>
+
+<script id="category_select_template" type="text/template">
+	 <option class="cat" value="{{id}}">{{icon}} {{title}}</option>
+</script>
+	
+    <script language="JavaScript" type="text/javascript" src="array_query.js"></script>
+    <script language="JavaScript" type="text/javascript" src="javascript/debug_timer.js"></script>
+    <script language="JavaScript" type="text/javascript" src="carbon.js"></script>
+    <script language="JavaScript" type="text/javascript" src="functions.js"></script>
+	<script language="JavaScript" type="text/javascript" src="controller.js"></script>
+

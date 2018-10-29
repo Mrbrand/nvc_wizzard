@@ -1,0 +1,116 @@
+/* page ***********************************************************************/
+body {margin:0;  font-family:Verdana,Tahoma;background:#A0A040;}
+.page {width:100%;    top:0px;   display:none; min-height:600px;}
+.header{ padding:5px; background:#A0A040; margin:0; height:45px; font-size: 12pt; display: block;}
+
+.parent_item {background: #ffff99; padding:2px; border-radius:3px; margin:3px;}
+#task_list .header{background:#4d987b; }
+#task_list.page{background:#4d987b; }
+
+.menu-title {margin-left:5px; width:260px; display:block; float:left; text-overflow:ellipsis; white-space:nowrap;overflow: hidden; font-size: 20px; text-shadow:1px 1px 1px #123;}
+.controls{background: -webkit-linear-gradient(#333300, #1a1a00); padding:5px; height:36px;}
+.controls-extra{background:#345; padding:5px; overflow-x:hidden;}
+.search{border-radius:3px;width:150px;}
+
+/* Buttons **********************************************************************/
+
+.new-button {float:right;}
+.home-button {float:left;margin-right:3px;}
+.back-button {float:left;}
+.cancel-button {float:left;}
+.add-button{float:right;}
+ 
+button{
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #e0e0e0), color-stop(1, #b5b3b5));
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	color:#525252;
+	font-family:Trebuchet MS;
+	font-size:15px;
+	font-weight:bold;
+	padding: 6px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #dbdbdb;
+}
+
+/*  Radioknappar för prio och context *****************************************************' */
+
+label > input{ /* HIDE RADIO */
+  display:none;
+}
+label > input + img{ /* IMAGE STYLES */
+  cursor:pointer;
+  border:2px solid transparent;
+}
+label > input:checked + img{ /* (CHECKED) IMAGE STYLES */
+    border: 2px solid #B0DC59;
+    border-radius: 5px;
+}
+
+label > input + span{ /* IMAGE STYLES */
+  cursor:pointer;
+  border:2px solid transparent;
+  padding:3px;
+}
+label > input:checked + span{ /* (CHECKED) IMAGE STYLES */
+    border: 2px solid #B0DC59;
+    border-radius: 5px;
+    padding:3px;
+}
+
+.controls label > input + span{ /* IMAGE STYLES */
+  padding:1px;
+}
+
+/****** ITEMLIST **************************************************************/
+.empty{margin-top:100px;color:#666; text-align: center;}
+
+
+/* ITEM **************************************************************************************/
+.item{font-size: 10pt; padding-bottom: 3px; background: -webkit-linear-gradient(#FFF, #CCC);  color: #333;min-height:70px;}	 
+.item.issue{background: -webkit-linear-gradient(#EEF, #BBC);    color: #333;}
+
+.subitem-left{height:100%;   width:45px;    float:left;    cursor:pointer;}
+.subitem-center{width:auto;    padding-top:3px;     padding-left:3px;     overflow:hidden;    cursor:pointer;   min-height:60px; color:#555;}
+
+
+.field-description{font-size:10px; display:block;color:white;margin-left:5px;}
+.title{overflow: hidden;    font-weight:bold;     float:left;    display: block;    width:100%;}
+.notes {font: italic 10px Arial;    color: #999;     margin-right:5px;   white-space: pre-line; }
+.postpone {font: italic 10px Arial;    color: CadetBlue;    margin-right:5px;   background:#678; padding:2px;}
+.subitem-notes {float: left;  display: block;  font-size: 8pt;  height: 15px; overflow: hidden; width:200px; text-overflow:ellipsis; white-space:nowrap;}
+.next_action {font-size:10px;  color: #399;  height: 12px; overflow: hidden;}  
+.task_notes {font-size: 8pt;  color: #999;  height: 15px; overflow: hidden;}  
+.finish_date{ font-size:10px;  color: #974;  height: 12px; overflow: hidden;font-weight:bold;}  
+.item.postponed{ background:  -webkit-linear-gradient(#BBF, #88A);}
+.notes{color:#88A;}
+.next_action{color: #A96;}
+ .parent{font-size:12px;color:#AA6; font-weight:bold;}
+ 
+.finished{background: -webkit-linear-gradient(#99A, #778);}
+.finished>.subitem-center>.title{color:#CCC;}
+.finished>.subitem-center>.next_action_div>.notes{color:#CCC;}
+.finished>.subitem-left>img{opacity: 0.4;}
+
+
+
+/****** FORM FIELDS *******/
+textarea {width:100%;  border:0; padding:5px; margin:0; font-size:12pt; color:#555; margin-bottom:2px; font-family:Verdana,Tahoma;box-sizing: border-box;}
+select {  width:100%;  border: 0;  padding:5px;  margin:0;  font-size: 12pt;  color: #555;  margin-bottom: 3px;box-sizing: border-box;}
+input {  width:100%;  margin:0;  font-size: 12pt;  height: 30px;  margin-bottom: 3px;box-sizing: border-box;}
+.btn {  width:100%;  margin:0;  font-size: 12pt;  height: 30px;  margin-bottom: 3px;box-sizing: border-box;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
